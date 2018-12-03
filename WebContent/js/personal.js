@@ -17,9 +17,21 @@ $(function(){
 	//longAskEnroll();
 	
 	//报名消息被查看
+	/*
 	$("#enrollMes").click(function(){
 		window.location="tojsp?mesCount="+$("#badge").text();
+	})*/
+	//查看未读消息
+	$("#noReadMes").click(function(){
+		window.location="noReadMes";
 	})
+	//查看已读消息
+	$("#ReadMes").click(function(){
+		window.location="ReadMes";
+	})
+	
+	
+	
 	//点击我发布的每一个活动
 	$('#publish').on('click','.publishname',function () {
 //	    window.open("myActivity?activityId="+$(this).attr("id"));
@@ -262,29 +274,32 @@ $(function(){
 	})
 	
 	//点击开始活动按钮
+	/*
 	$('#publish').on('click','#startactivity',function () {
-		var msg = "您确定开始活动？";     
+		var msg = "您确定开始活动？";    
+		
 		if (confirm(msg)==true){
 			window.location="startactivity?activityId="+$(".publishname").attr("id");
 		}   
 		
-	})
+	})*/
 	//点击结束活动按钮
+	/*
 	$('#publish').on('click','#endactivity',function () {
 		var msg = "您确定要结束活动？";
 		if (confirm(msg)==true){
 			window.location="endactivity?activityId="+$(".publishname").attr("id");
 		}   
 		
-	})
+	})*/
 	//点击评价活动按钮
+	/*
 	$('#publish').on('click','#evaluateactivity',function () {
 		
 	   window.location="evaluate?activityId="+$(".publishname").attr("id")+"&&currPage=1";
-	})
+	})*/
 	//点击自己参加活动的评价按钮
 	$('#join').on('click','#joinerevaluateactivity',function(){
-		
 		 window.location="joinerevaluate?activityId="+$(".joinname").attr("id");
 	})
 	
@@ -318,13 +333,25 @@ function getMyPublishedAc(index){
 				if(value.status=="待审核"){
 					msg+="<span class='publishspan'>审核中</span>"+"</div>";
 				}else if(value.status=="已通过"){
-					msg+="<input type='button' value='开始活动' class='publishinput' id='startactivity' />"+"</div>";
+					
+					//msg+="" +"<form action='startactivity?activityId="+value.activityId+"' method='post'/>"+
+							//"<input type='submit' value='开始活动' class='publishinput' id='startactivity' />"
+							//+"</form></div>";
+					msg+=" <a href='javascript:startactivity("+value.activityId+")' class='publishinput' style='text-align:center;'>开始活动</a>";
 				}else if(value.status=="进行中"){
-					msg+="<input type='button' value='确认结束' class='publishinput' id='endactivity'/>"+"</div>";
+					//msg+="<input type='button' value='确认结束' class='publishinput' id='endactivity'/>"+"</div>";
+					msg+=" <a href='javascript:endactivity("+value.activityId+")' class='publishinput' style='text-align:center;'>确认结束</a>";
 				}else if(value.status=="待评价"){
 					msg+="<input type='button' value='评价' class='publishinput' id='evaluateactivity' />"+"</div>";
 				}else if(value.status=="已结束"){
-					msg+="<span class='publishspan'></span>"+"</div>";
+					if(value.ispingjia==0)
+					{
+						//msg+="<input type='button' value='评价' class='publishinput' id='evaluateactivity' />"+"</div>";
+						msg+=" <a href='javascript:evaluateactivity("+value.activityId+")' class='publishinput' style='text-align:center;'>评价</a>";
+						
+					}else{
+						msg+="<span class='publishspan'></span>"+"</div>";
+					}
 				}
 				$("#publish").append(msg);
 			})
@@ -359,20 +386,46 @@ function searchPublishedAc(index,content){
 				if(value.status=="待审核"){
 					msg+="<span class='publishspan'>审核中</span>"+"</div>";
 				}else if(value.status=="已通过"){
-					msg+="<input type='button' value='开始活动' class='publishinput' id='startactivity' />"+"</div>";
+					//msg+="<input type='button' value='开始活动' class='publishinput' id='startactivity' />"+"</div>";
+					msg+=" <a href='javascript:startactivity("+value.activityId+")' class='publishinput' style='text-align:center;'>开始活动</a>";
 				}else if(value.status=="进行中"){
-					msg+="<input type='button' value='确认结束' class='publishinput' id='endactivity'/>"+"</div>";
+					//msg+="<input type='button' value='确认结束' class='publishinput' id='endactivity'/>"+"</div>";
+					msg+=" <a href='javascript:endactivity("+value.activityId+")' class='publishinput' style='text-align:center;'>确认结束</a>";
 				}else if(value.status=="待评价"){
 					msg+="<input type='button' value='评价' class='publishinput' id='evaluateactivity' />"+"</div>";
 				}else if(value.status=="已结束"){
-					msg+="<span class='publishspan'></span>"+"</div>";
+					if(value.ispingjia==0)
+					{
+						//msg+="<input type='button' value='评价' class='publishinput' id='evaluateactivity' />"+"</div>";
+						msg+=" <a href='javascript:evaluateactivity("+value.activityId+")' class='publishinput' style='text-align:center;'>评价</a>";
+						
+					}else{
+						msg+="<span class='publishspan'></span>"+"</div>";
+					}
 				}
 				$("#publish").append(msg);
 			})
 		}
 	})
 }
-//获取我报名的活动
+
+function startactivity(startactivityId){
+	//alert(startactivityId);
+	window.location="startactivity?activityId="+startactivityId;
+}
+
+function endactivity(id){
+	//alert(startactivityId);
+	window.location="endactivity?activityId="+id;
+}
+//评价活动
+function evaluateactivity(id){
+	//alert(startactivityId);
+	window.location="evaluate?activityId="+id;
+}
+
+
+//获取我参与的活动
 function getMyJoinedAc(index){
 	$.ajax({
 		url:"getJoAcByPage",
@@ -385,6 +438,7 @@ function getMyJoinedAc(index){
 			$("#join").empty();
 			window.joinMax = array[0];
 			array.splice(0,1);
+			
 			$.each(array,function(index,value){
 				var msg="<div class='publishitem'>"+
 				"<div class='publishtime'>"+value.time+"</div>"+
@@ -399,19 +453,31 @@ function getMyJoinedAc(index){
 				
 				var agreeflag=false;
 				var refuseflag=false;
+				var i;
 				 //对是否同意进行处理
-				for(var u in value.trueJoinerList)
-				{
-					alert("userID"+u.userId);
+				var trueJoiner= new Array(); //定义一数组 
+				trueJoiner=value.trueJoinerId.split(","); //字符分割 
+				for (i=0;i<trueJoiner.length ;i++ ) 
+				{ 
 					//已经同意的人
-					if(u.userId==userId)
+					if(trueJoiner[i]==userId)
 					{
 						if(value.status=="进行中"){
 							msg+="<span class='publishspan'>等待发布者结束</span>"+"</div>";
 						}else if(value.status=="待评价"){
 							msg+="<input type='button' value='评价' class='publishinput' id='joinerevaluateactivity' />"+"</div>";
 						}else if(value.status=="已结束"){
-							msg+="<span class='publishspan'></span>"+"</div>";
+							//msg+="<span class='publishspan'></span>"+"</div>";
+							//alert(value.ispingjia);
+							if(value.ispingjia==0)
+							{
+								msg+=" <a href='javascript:evaluateactivity("+value.activityId+")' class='publishinput' style='text-align:center;'>评价</a>";
+								//msg+="<input type='button' value='评价' class='publishinput' id='evaluateactivity' />"+"</div>";
+							}else{
+								msg+="<span class='publishspan'></span>"+"</div>";
+							}
+							
+							
 						}else{
 							msg+="<span class='publishspan'>发布者已同意</span>"+"</div>";
 						}
@@ -419,24 +485,26 @@ function getMyJoinedAc(index){
 					}
 				}
 				//还未同意
-				if(agreeflag)
+				if(!agreeflag)
 				{
-					for(var u in value.unwillingOutSet)
+					var unwillingOut= new Array(); //定义一数组 
+					unwillingOut=value.unwillingOutID.split(","); //字符分割 
+					for (i=0;i<unwillingOut.length ;i++ )
 					{
 						//被拒绝的人
-						if(u.userId==userId)
+						if(unwillingOut[i]==userId)
 						{
 							msg+="<span class='publishspan'>已被拒绝</span>"+"</div>";
-							refuseflag=false;
+							refuseflag=true;
 						}
 					}
 					//还未审核的 
-					if(refuseflag)
+					if(!refuseflag)
 					{
 						msg+="<span class='publishspan'>待发布者审核</span>"+"</div>";
 					}	
 				}
-				msg+="<input type='button' value='评价' class='publishinput' id='joinerevaluateactivity' />"+"</div>";
+				 //msg+="<input type='button' value='评价' class='publishinput' id='joinerevaluateactivity' />"+"</div>";
 				$("#join").append(msg);
 			})
 		}
@@ -457,19 +525,72 @@ function searchJoinedAc(index,content){
 			window.searchJoMax = array[0];
 			array.splice(0,1);
 			$.each(array,function(index,value){
-				console.log("into the foreach");
-				$("#join").append("<div class='publishitem'>"+
-						"<div class='publishtime'>"+value.time+"</div>"+
-						"<img src='"+value.imgUrl+"' height='100px' width='140px' class='publishpicture' />"+
-						"<div class='joinname' id='"+value.activityId+"'><a>"+value.name+"</a></div>"+
-						"<div class='publishnumber'>"+
-							"活动人数：<br />"+value.perNum+
-						"</div>"+
-						"<div class='publishstate'>"+
-							"活动状态：<br />"+value.status+
-						"</div>"+
-						"<input type='button' value='等待评价' class='publishinput' />"+
-					"</div>");
+				var msg="<div class='publishitem'>"+
+				"<div class='publishtime'>"+value.time+"</div>"+
+				"<img src='"+value.imgUrl+"' height='100px' width='140px' class='publishpicture' />"+
+				"<div class='joinname' id='"+value.activityId+"'><a>"+value.name+"</a></div>"+
+				"<div class='publishnumber'>"+
+					"活动人数：<br />"+value.perNum+
+				"</div>"+
+				"<div class='publishstate'>"+
+					"活动状态：<br />"+value.status+
+				"</div>";
+				
+				var agreeflag=false;
+				var refuseflag=false;
+				var i;
+				 //对是否同意进行处理
+				var trueJoiner= new Array(); //定义一数组 
+				trueJoiner=value.trueJoinerId.split(","); //字符分割 
+				for (i=0;i<trueJoiner.length ;i++ ) 
+				{ 
+					//已经同意的人
+					if(trueJoiner[i]==userId)
+					{
+						if(value.status=="进行中"){
+							msg+="<span class='publishspan'>等待发布者结束</span>"+"</div>";
+						}else if(value.status=="待评价"){
+							msg+="<input type='button' value='评价' class='publishinput' id='joinerevaluateactivity' />"+"</div>";
+						}else if(value.status=="已结束"){
+							//msg+="<span class='publishspan'></span>"+"</div>";
+							//alert(value.ispingjia);
+							if(value.ispingjia==0)
+							{
+								msg+=" <a href='javascript:evaluateactivity("+value.activityId+")' class='publishinput' style='text-align:center;'>评价</a>";
+								//msg+="<input type='button' value='评价' class='publishinput' id='evaluateactivity' />"+"</div>";
+							}else{
+								msg+="<span class='publishspan'></span>"+"</div>";
+							}
+							
+							
+						}else{
+							msg+="<span class='publishspan'>发布者已同意</span>"+"</div>";
+						}
+						agreeflag=true;
+					}
+				}
+				//还未同意
+				if(!agreeflag)
+				{
+					var unwillingOut= new Array(); //定义一数组 
+					unwillingOut=value.unwillingOutID.split(","); //字符分割 
+					for (i=0;i<unwillingOut.length ;i++ )
+					{
+						//被拒绝的人
+						if(unwillingOut[i]==userId)
+						{
+							msg+="<span class='publishspan'>已被拒绝</span>"+"</div>";
+							refuseflag=true;
+						}
+					}
+					//还未审核的 
+					if(!refuseflag)
+					{
+						msg+="<span class='publishspan'>待发布者审核</span>"+"</div>";
+					}	
+				}
+				 //msg+="<input type='button' value='评价' class='publishinput' id='joinerevaluateactivity' />"+"</div>";
+				$("#join").append(msg);
 			})
 		}
 	})

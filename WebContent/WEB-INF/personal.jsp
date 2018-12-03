@@ -39,8 +39,8 @@
 			class="naviga" href="appoint.action" >约起来</a> <a
 			class="naviga" href="lendBook.action" >互借书</a> <a
 			class="naviga" href="growUp.action" >助成长</a> <a
-			class="naviga" href="leaveMarket.action" >闲置市场</a> <a
-			class="naviga" href="load.action" >小额借款</a> <a
+			class="naviga" href="leaveMarket.action" >闲置市场</a>  <!--  
+    <a class="naviga" href="load.action" >小额借款</a>--> <a
 			class="naviga_onclick" href="#" target="_self">个人中心</a>
 		<div id="submit">
 		</div>
@@ -52,6 +52,8 @@
 			<img src="${user.imgUrl}" height="100px" width="100px" id="head" />
 			<div id="gra">
 				<span id="gradetitle">信用积分：</span><span id="grade">${user.score}</span>
+				
+			
 			</div>
 		</div>
 		<div id="main_right">
@@ -62,7 +64,10 @@
 						消息提醒  <span class="badge"></span>
 						<div id="messageitem">
 							<div id="first">消息提醒  </div>
-							<div class="messitem" id="enrollMes">报名消息  <span class="badge" id="badge"></span></div>
+							<div class="messitem" id="noReadMes">未读消息  <span class="badge" id="badge">${fn:length(noreadMessage)}</span></div>
+							 
+							<div class="messitem" id="ReadMes">已读消息  <span class="badge" id="badge">${fn:length(readMessage)}</span></div>
+						
 						</div>
 
 					</div>
