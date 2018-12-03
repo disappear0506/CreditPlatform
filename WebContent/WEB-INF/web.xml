@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>CreditPlatform</display-name>
+  <welcome-file-list>
+    <welcome-file>login.jsp</welcome-file>
+  </welcome-file-list>
+  <filter>
+    <filter-name>struts2</filter-name>
+    <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+    <init-param>
+      <param-name>config</param-name>
+      <param-value>struts-default.xml,struts-plugin.xml,config/struts.xml</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>struts2</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:config/spring.xml</param-value>
+  </context-param>
+  
+  <servlet>  
+    <description>输出验证码</description>  
+    <display-name>This is the display name of my J2EE component</display-name>  
+    <servlet-name>PictureCheckCode</servlet-name>  
+    <servlet-class>code.servlet.PictureCheckCode</servlet-class>  
+  </servlet>  
+  
+  <servlet-mapping>  
+    <servlet-name>PictureCheckCode</servlet-name>  
+    <url-pattern>/PictureCheckCode</url-pattern>  
+  </servlet-mapping>  
+  <!-- 
+  <error-page>
+
+     <error-code>404</error-code>
+
+     <location>/WEB-INF/NF404.html</location>
+
+  </error-page>
+  
+  <error-page>
+
+     <error-code>500</error-code>
+
+     <location>/WEB-INF/Error500.html</location>
+
+  </error-page> 
+    -->
+</web-app>

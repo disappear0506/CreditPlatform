@@ -1,0 +1,84 @@
+*{margin: 0; padding: 0;}
+.wp{
+    margin: 0 auto;
+    width: 960px;
+}
+body {
+    font-family: Microsoft YaHei;
+    font-size: 15px;
+}
+.top{
+    width: 1060px;
+    height: 100px;
+    border-bottom:solid 1px  #EBEBEB;
+}
+.top>img{
+    margin: 15px 0 15px 50px;
+    width: 200px;
+    height: 70px;
+    background-color: #0066bb;
+    float: left;
+}
+.top>.title{
+    margin: 15px 0 15px 15px;
+    width: 130px;
+    height: 70px;
+    float: left;
+    border-left:solid 1px  #EBEBEB;;
+    text-align: center;
+    line-height: 70px;
+    font-size: 24px;
+}
+.center{
+    margin-top: 50px;
+    width: 960px;
+    height: 330px;
+}
+div.center>div.center1{
+    font-size: 20px;
+    height: 40px;
+}
+div.center>.center1>div{
+    width: 200px;
+    float: left;
+    margin-right: 10px;
+    margin-left: 10px;
+    text-align: center;
+    line-height: 40px;
+}
+div.center>.center1>.div1{
+    background: #F7F7F7;
+}
+div.center>.center1>.div2{
+    background: #F7F7F7;
+}
+div.center>.center1>.div3{
+    background-color: #DCEBFE;
+}
+div.center>div.txt{
+    width:960px;
+    height: 450px;
+    margin-top: 20px;
+    font-size: 20px;
+}
+div.center>div.txt>img{
+    margin: 100px 0 0 100px;
+}
+#foot
+{
+	height:100px;
+	width:1280px;
+	margin:0 auto;
+	margin-top:20px;
+	margin-bottom:20px;
+}
+#personal
+{
+	height:50px;
+	width:300px;
+	line-height:50px;
+	font-size:14px;
+	margin-left:400px;
+	margin-top:50px;
+}
+

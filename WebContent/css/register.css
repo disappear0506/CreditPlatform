@@ -1,0 +1,126 @@
+*{margin: 0; padding: 0;}
+.wp{
+    margin: 0 auto;
+    width: 960px;
+}
+body {
+    font-family: Microsoft YaHei;
+    font-size: 20px;
+}
+.top{
+    width: 1060px;
+    height: 100px;
+    border-bottom:solid 1px  #EBEBEB;
+}
+.top>img{
+    margin: 15px 0 15px 50px;
+    width: 200px;
+    height: 75px;
+    background-color: #0066bb;
+    float: left;
+}
+.top>.title{
+    margin: 15px 0 15px 15px;
+    width: 130px;
+    height: 70px;
+    float: left;
+    border-left:solid 1px  #EBEBEB;
+    text-align: center;
+    line-height: 70px;
+    font-size: 24px;
+}
+.top>.login{
+    margin: 15px 50px 15px 0;
+    width: 230px;
+    height: 70px;
+    float: right;
+    text-align: center;
+    line-height: 70px;
+    font-size: 15px;
+}
+.top>.login>button{
+   display:block;
+	height:40px;
+	border:0px;
+	background:#A7ADED;
+	font-family: "Microsoft YaHei",STHeiti,Helvetica,Arial,sans-serif;
+	font-size:16px;
+	color:#FFF;
+	float:right;
+	margin-right:30px;
+	line-height:40px;
+	margin-top:15px;
+	font-weight:bold;
+	width:70px;
+	margin-left:10px;
+}
+.center{
+    margin-top:50px ;
+    width: 960px;
+    height: 400px;
+}
+.center div{
+    margin-bottom: 20px;
+}
+input{
+    height: 35px;
+    width: 350px;
+    border:solid 1px #EBEBEB;
+    padding-left: 15px;
+}
+#checkCode{
+    width: 150px;
+    margin-right: 25px;
+}
+#sentMessage a{
+    width: 100px;
+    height: 35px;
+    float:right;
+    margin-right:590px;
+    text-align:center;
+	line-height:35px;
+	text-decoration:none;
+	color:#FFF;
+	background:#A7ADED;
+	margin-top:-33px;
+	font-family: "Microsoft YaHei",STHeiti,Helvetica,Arial,sans-serif;
+	font-size:16px;
+	font-weight:bold;
+}
+#checkBox{
+    margin-left: 70px;
+    font-size:15px ;
+    height: 20px;
+    line-height: 15px;
+}
+#checkBox{
+    width: 20px;
+    height: 15px;
+}
+.center>.checkBox>a{
+    text-decoration: none;
+}
+.center .button{
+    margin-left: 70px;
+}
+.center .button>button{
+    height: 35px;
+    width: 350px;
+    background-color: #408AEC;
+}
+#foot
+{
+	height:150px;
+	width:1080px;
+	margin:0 auto;
+	
+}
+#personal
+{
+	height:50px;
+	width:300px;
+	line-height:50px;
+	font-size:14px;
+	margin-left:400px;
+	margin-top:50px;
+}

@@ -1,0 +1,225 @@
+@charset "utf-8";
+/* CSS Document */
+
+@charset "utf-8";
+/* CSS Document */
+
+body
+{
+	padding:0px;
+	height:100%;
+	min-height:600px;
+	min-width:1200px;
+	font-family: "Microsoft YaHei",STHeiti,Helvetica,Arial,sans-serif;
+}
+#top
+{
+	width:1200px;
+	margin:0 auto;
+	height:100px;
+	border-bottom:solid 1px  #EBEBEB;
+	margin-bottom:20px;
+}
+#top>img
+{
+	height:75px;
+	width:175px;
+	margin-top:15px;
+	margin-right:15px;
+	display:block;
+	float:left;
+	background-color: #0066bb;
+}
+#top>.title
+{
+	margin: 15px 0 15px 15px;
+    width: 400px;
+    height: 70px;
+    float: left;
+    border-left:solid 1px  #EBEBEB;;
+    line-height: 70px;
+    font-size: 24px;
+	padding-left:15px;
+}
+
+#main
+{
+	width:1200px;
+	margin:0 auto;
+}
+
+#foot
+{
+	height:100px;
+	width:1200px;
+	margin:30px auto;
+}
+
+
+#main_left
+{
+	width:196px;
+	height:250px;
+	float:left;
+	margin-right:20px;
+	border-bottom:#CCC 2px solid;
+}
+#main_right
+{
+	width:980px;
+	height:500px;
+	float:left;
+}
+#main_left>img
+{
+	display:block;
+	margin-top:50px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+#main_left>#gra
+{
+	height:30px;
+	margin-top:10px;
+	margin-left:50px;
+}
+
+#main_left>#gra>#gradetitle
+{
+	margin-right:10px;
+	color:#999;
+	height:30px;
+	line-height:30px;
+}
+#main_left>#gra>#grade
+{
+	height:30px;
+	line-height:30px;
+}
+
+
+#main_left>#change
+{
+	height:30px;
+	width:80px;
+	margin-top:20px;
+	margin-left:auto;
+	margin-right:auto;
+	background:#A7ADED;
+	color:#FFF;
+	font-weight:bold;
+	line-height:30px;
+	text-align:center;
+	
+}
+
+#main_right>#changeinfotitle
+{
+	height:50px;
+	width:980px;
+}
+#main_right>#changeinfotitle>#basetitle
+{
+	height:30px;
+	margin-top:10px;
+	width:80px;
+	margin-left:20px;
+	font-weight:bold;
+	font-size:16px;
+	line-height:30px;
+	float:left;
+}
+#main_right>#changeinfotitle>a
+{
+	height:30px;
+	text-decoration:none;
+	color:#A7ADED;
+	font-size:16px;
+	line-height:30px;
+	display:block;
+	width:100px;
+	margin-top:10px;
+	float:left;
+}
+#main_right>#changeinfotitle>a:hover
+{
+	text-decoration:underline;
+}
+#changeinfomain
+{
+	height:300px;
+	margin-top:10px;
+	width:980px;
+}
+
+#changeinfomain>.changeitem
+{
+	height:50px;
+	width:980px;
+	border-bottom:#ccc 2px solid;
+}
+
+#changeinfomain>.changeitem>.itemtitle
+{
+	height:30px;
+	margin-top:10px;
+	width:80px;
+	line-height:30px;
+	color:#999;
+	float:left;
+	margin-left:20px;
+	size:14px;
+}
+#changeinfomain>.changeitem>input
+{
+	height:25px;
+	width:200px;
+	display:block;
+	float:left;
+	margin-top:10px;
+	font-size:16px;
+}
+#changeinfomain>.changesave
+{
+	height:50px;
+	width:980px;
+}
+#changeinfomain>.changesave>#save
+{
+	height:30px;
+	width:50px;
+	background:#A7ADED;
+	border:0px;
+	display:block;
+	margin-top:10px;
+	margin-left:200px;
+	color:#FFF;
+	font-weight:bold;
+}
+#preview{
+    margin: 20px 0 0px 30px;
+    width: 100px;
+    height: 100px;
+}
+#preview>div.img{
+    float: left;
+    width:100px;
+    height:100px;
+    border:1px solid #EBEBEB;
+    over-hidden:hidden;
+    margin-left:8px;
+}
+#personal
+{
+	height:50px;
+	width:300px;
+	line-height:50px;
+	font-size:14px;
+	margin-left:400px;
+	margin-top:50px;
+}
+.file-box{position:relative;width: 170px;height: 26px;margin-top: 10px}
+#textField{ height:20px; border:1px solid #cdcdcd; width:100px;float:left}
+#btn1{ background-color:#FFF; border:1px solid #CDCDCD;height:24px; width:60px;}
+#fileField{position:absolute;top:0; height:24px; width:170px;left:0px;filter:alpha(opacity:0);opacity: 0;}

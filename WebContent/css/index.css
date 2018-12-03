@@ -1,0 +1,303 @@
+@charset "utf-8";
+/* CSS Document */
+body
+{
+	padding:0px;
+	height:100%;
+	min-height:600px;
+	min-width:1200px;
+	font-family: "Microsoft YaHei",STHeiti,Helvetica,Arial,sans-serif;
+}
+#top
+{
+	height:70px;
+	width:1200px;
+	margin:0 auto;
+}
+#main
+{
+	height:945px;
+	width:1200px;
+	margin:0 auto;
+	margin-top:20px;
+}
+#foot
+{
+	height:100px;
+	width:1200px;
+	margin:0 auto;
+	margin-top:20px;
+	margin-bottom:20px;
+}
+
+#top #logo
+{
+	height:70px;
+	width:150px;
+	background:url(../images/logo.png);
+	float:left;
+}
+
+
+#top a.naviga
+{
+	text-decoration:none;
+	font-family: "Microsoft YaHei",STHeiti,Helvetica,Arial,sans-serif;
+	font-size:20px;
+	color:#A7ADED;
+	line-height:70px;
+	display:block;
+	height:70px;
+	margin-left:10px;
+	padding-left:10px;
+	float:left;
+	font-weight:bold;
+}
+
+#top a.naviga:hover
+{
+	color:#517290;
+}
+
+#top a.naviga_onclick
+{
+	text-decoration:none;
+	font-family: "Microsoft YaHei",STHeiti,Helvetica,Arial,sans-serif;
+	font-size:20px;
+	color:#517290;
+	line-height:70px;
+	display:block;
+	height:70px;
+	margin-left:10px;
+	padding-left:10px;
+	float:left;
+	font-weight:bold;
+}
+
+
+#top #submit
+{
+	height:70px;
+	width:200px;
+	float:right;
+}
+#top #submit #login
+{
+	display:block;
+	height:40px;
+	border:0px;
+	background:#517290;
+	font-family: "Microsoft YaHei",STHeiti,Helvetica,Arial,sans-serif;
+	font-size:16px;
+	color:#FFF;
+	float:left;
+	margin-left:30px;
+	line-height:40px;
+	margin-top:15px;
+	font-weight:bold;
+}
+#top #submit #register
+{
+	display:block;
+	height:40px;
+	border:0px;
+	background:#A7ADED;
+	font-family: "Microsoft YaHei",STHeiti,Helvetica,Arial,sans-serif;
+	font-size:16px;
+	color:#FFF;
+	float:left;
+	margin-left:30px;
+	line-height:40px;
+	margin-top:15px;
+	font-weight:bold;
+}
+
+#main #main_left
+{
+	width:900px;
+	height:100%;
+	float:left;
+	margin-right:20px;
+}
+
+#main #main_right
+{
+	width:280px;
+	height:100%;
+	float:left;
+	font-size:14px;
+	color:#517290;
+}
+
+#main #main_left #flash
+{
+	width:900px;
+	height:350px;
+}
+
+#main #main_left #hostac
+{
+	width:900px;
+	height:575px;
+	margin-top:20px;
+}
+#main #main_left #hostac #title
+{
+	height:23px;
+	border-bottom:2px solid #D4D8DC;
+	line-height:23px;
+	font-size:15px;
+	font-weight:bold;
+	color:#517290;
+	letter-spacing:3px;
+}
+
+#main #main_left #hostac .host_left
+{
+	width:430px;
+	margin-right:20px;
+	height:260px;
+	float:left;
+	margin-top:15px;
+}
+.achost
+{
+	height:100px;
+	width:430px;
+}
+.actable
+{
+	height:150px;
+	width:430px;
+	margin-top:10px;
+}
+
+.achost .acimage
+{
+	height:100px;
+	width:140px;
+	float:left;
+	background:#0CF;
+	margin-right:10px;
+}
+
+.achost .acdescribe
+{
+	height:100px;
+	width:280px;
+	float:left;
+}
+
+.achost .acdescribe .acschooltitle
+{
+	margin-top:5px;
+	height:35px;
+	width:280px;
+}
+
+.achost .acdescribe .acschooltitle a.acschool
+{
+	display:block;
+	margin-right:10px;
+	font-size:16px;
+	float:left;
+	color:#00A5ED;
+	text-decoration:none;
+	height:35px;
+	line-height:35px;
+}
+
+.achost .acdescribe .acschooltitle a.actitle
+{
+	display:block;
+	font-size:16px;
+	float:left;
+	color:#517290;
+	height:35px;
+	line-height:35px;
+	height:35px;
+	text-decoration:none;
+	font-weight:bold;
+}
+
+.achost .acdescribe .acschooltitle a.actitle:hover
+{
+	color:#00A5ED;
+}
+
+.achost .acdescribe .acbiref
+{
+	height:50px;
+	margin-top:10px;
+	line-height:25px;
+	width:280px;
+	color:#517290;
+	font-size:13px;
+	padding-right:0px;
+	word-break:break-all;
+	white-space:normal;
+}
+
+.actable .actableitem
+{
+	margin-bottom:10px;
+	height:20px;
+	border-left:4px solid #D4D8DC;
+	width:426px;
+}
+.actable .actableitem .actableitemst
+{
+	height:20px;
+	font-size:15px;
+	line-height:20px;
+	width:316px;
+	float:left;
+	margin-right:10px;
+}
+
+.actable .actableitem .actableitemst a.actableitemschool
+{
+	display:block;
+	float:left;
+	margin-right:10px;
+	color:#00A5ED;
+	text-decoration:none;
+	padding-left:10px;
+}
+
+
+.actable .actableitem .actableitemst a.actableitemtitle
+{
+	display:block;
+	float:left;
+	color:#517290;
+	text-decoration:none;
+}
+
+.actable .actableitem .actableitemst a.actableitemtitle:hover
+{
+	color:#00A5ED;
+}
+
+.actable .actableitem .actableitemtime
+{
+	height:20px;
+	font-size:14px;
+	line-height:20px;
+	width:100px;
+	float:right;
+	color:#D4D8DC;
+	
+}
+#personal
+{
+	height:50px;
+	width:300px;
+	line-height:50px;
+	font-size:14px;
+	margin-left:400px;
+	margin-top:50px;
+}
+
+
+

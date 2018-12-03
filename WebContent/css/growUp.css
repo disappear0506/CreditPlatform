@@ -1,0 +1,293 @@
+@charset "utf-8";
+/* CSS Document */
+body
+{
+	padding:0px;
+	height:100%;
+	min-height:600px;
+	min-width:1200px;
+	font-family: "Microsoft YaHei",STHeiti,Helvetica,Arial,sans-serif;
+}
+#top
+{
+	height:70px;
+	width:1280px;
+	margin:0 auto;
+}
+#main
+{
+	height:850px;
+	width:1280px;
+	margin:0 auto;
+}
+
+
+#foot
+{
+	height:100px;
+	width:1280px;
+	margin:0 auto;
+	margin-top:20px;
+	margin-bottom:20px;
+}
+
+#top #logo
+{
+	height:70px;
+	width:150px;
+	background:url(../images/logo.png);
+	float:left;
+}
+
+
+#top a.naviga
+{
+	text-decoration:none;
+	font-family: "Microsoft YaHei",STHeiti,Helvetica,Arial,sans-serif;
+	font-size:20px;
+	color:#A7ADED;
+	line-height:70px;
+	display:block;
+	height:70px;
+	margin-left:10px;
+	padding-left:10px;
+	float:left;
+	font-weight:bold;
+}
+
+#top a.naviga:hover
+{
+	color:#517290;
+}
+
+#top a.naviga_onclick
+{
+	text-decoration:none;
+	font-family: "Microsoft YaHei",STHeiti,Helvetica,Arial,sans-serif;
+	font-size:20px;
+	color:#517290;
+	line-height:70px;
+	display:block;
+	height:70px;
+	margin-left:10px;
+	padding-left:10px;
+	float:left;
+	font-weight:bold;
+}
+
+
+#top #submit
+{
+	height:70px;
+	width:200px;
+	float:right;
+}
+#top #submit #login
+{
+	display:block;
+	height:40px;
+	border:0px;
+	background:#517290;
+	font-family: "Microsoft YaHei",STHeiti,Helvetica,Arial,sans-serif;
+	font-size:16px;
+	color:#FFF;
+	float:left;
+	margin-left:30px;
+	line-height:40px;
+	margin-top:15px;
+	font-weight:bold;
+}
+#top #submit #register
+{
+	display:block;
+	height:40px;
+	border:0px;
+	background:#A7ADED;
+	font-family: "Microsoft YaHei",STHeiti,Helvetica,Arial,sans-serif;
+	font-size:16px;
+	color:#FFF;
+	float:left;
+	margin-left:30px;
+	line-height:40px;
+	margin-top:15px;
+	font-weight:bold;
+}
+
+#classify
+{
+	background:#e2e2e2;
+	height:90px;
+	border: #CCC 1px  solid;
+	margin-top:10px;
+}
+#classify>#classifyku
+{
+	height:50px;
+	width:1200px;
+	margin:0 auto;
+	margin-top:20px;
+}
+
+#classify>#classifyku>#classifymain
+{
+	height:50px;
+	width:1000px;
+	float:left;
+}
+#classify>#classifyku>#postmessage
+{
+	float:left;
+	margin-top:5px;
+	height:30px;
+	width:200px;	
+}
+
+#classify>#classifyku>#postmessage>#post
+{
+	color:#fff;
+	font-size:18px;
+	font-weight:bold;
+	background:#A7ADED;
+	height:50px;
+	line-height:50px;
+	border:0px;
+	
+}
+
+
+.classifyitem01
+{
+	height:30px;
+	margin:10px 0;
+	font-size:14px;
+}
+.classifyitem02
+{
+	height:30px;
+	margin:10px 0;
+	font-size:14px;
+}
+.classifyitem03
+{
+	height:30px;
+	margin:10px 0;
+	font-size:14px;
+}
+
+.type
+{
+	height:30px;
+	color: #999;
+	display:block;
+	line-height:30px;
+	width:80px;
+	float:left;
+}
+
+.content
+{
+	height:30px;
+	display:block;
+	line-height:30px;
+	float:left;
+	cursor:pointer;
+	margin-right:20px;
+	padding-left:5px;
+	padding-right:5px;
+}
+.select
+{
+	margin-top:6px;
+}
+
+#main>.line
+{
+	margin-top:20px;
+	width:1280px;
+	height:800px;
+}
+
+.action
+{
+	margin-top:20px;
+	width:298px;
+	height:370px;
+	float:left;
+	margin-right:20px;
+	border:1px #CCC solid;
+}
+.action>.actitle
+{
+	width:250px;
+	height:60px;
+	font-size:16px;
+	word-break:break-all;
+	white-space:normal;
+	line-height:30px;
+	margin-top:10px;
+	text-decoration:none;
+	color:#000;
+	margin-left:20px;
+	margin-right:30px;
+}
+.action>.acnumber
+{
+	height:30px;
+	width:200px;
+	float:left;
+	margin-top:10px;
+	line-height:30px;
+}
+.action>.acnumber>.numbertitle
+{
+	padding-left:20px;
+	color: #999;
+	padding-right:10px;
+}
+
+
+.action>.acstate
+{
+	height:30px;
+	background:#ff9f9f;
+	border-radius:4px;
+	width:60px;
+	float:left;
+	text-align:center;
+	line-height:30px;
+	margin-top:10px;
+}
+
+.page
+{
+	margin-top:20px;
+	margin-left:930px;
+}
+.pageitem
+{
+	margin-left:10px;
+	font-size:16px;
+	color:#000;
+}
+.page>#pagefirst
+{
+	background:#ccc;
+}
+a{
+	color:#000;
+	text-decoration:none;
+	cursor:pointer;
+}
+a:hover
+{
+	text-decoration:underline;
+}
+#personal
+{
+	height:50px;
+	width:300px;
+	line-height:50px;
+	font-size:14px;
+	margin-left:400px;
+	margin-top:50px;
+}

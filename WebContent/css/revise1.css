@@ -1,0 +1,124 @@
+*{margin: 0; padding: 0;}
+.wp{
+    margin: 0 auto;
+    width: 960px;
+}
+body {
+    font-family: Microsoft YaHei;
+    font-size: 20px;
+}
+.top{
+    width: 1060px;
+    height: 100px;
+    border-bottom:solid 1px  #EBEBEB;
+}
+.top>img{
+    margin: 15px 0 15px 50px;
+    width: 200px;
+    height: 75px;
+    background-color: #0066bb;
+    float: left;
+}
+.top>.title{
+    margin: 15px 0 15px 15px;
+    width: 130px;
+    height: 70px;
+    float: left;
+    border-left:solid 1px  #EBEBEB;;
+    text-align: center;
+    line-height: 70px;
+    font-size: 24px;
+}
+.top>button{
+   display:block;
+	height:40px;
+	border:0px;
+	background:#A7ADED;
+	font-family: "Microsoft YaHei",STHeiti,Helvetica,Arial,sans-serif;
+	font-size:16px;
+	color:#FFF;
+	float:right;
+	margin-right:30px;
+	line-height:40px;
+	margin-top:30px;
+	font-weight:bold;
+	width:70px;
+	
+}
+.center{
+    margin-top: 50px;
+    width: 960px;
+    height: 400px;
+}
+div.center>div.center1{
+    height: 40px;
+}
+div.center>.center1>div{
+    width: 200px;
+    float: left;
+    margin-right: 10px;
+    margin-left: 10px;
+    text-align: center;
+    line-height: 40px;
+}
+div.center>.center1>.div1{
+    background-color: #DCEBFE;
+}
+div.center>.center1>.div2{
+    background: #F7F7F7;
+}
+div.center>.center1>.div3{
+    background: #F7F7F7;
+}
+div.center>div.information{
+    margin: 20px 0 0 10px;
+    height: 35px;
+}
+div.phone{
+    height: 35px;
+    margin: 0px 0 0 10px;
+}
+#phone{
+    width: 350px;
+    padding-left: 15px;
+    height: 35px;
+    border:solid 1px #EBEBEB;
+}
+div.checkCode{
+    height: 35px;
+    margin: 20px 0 0 10px;
+}
+#checkCode{
+    width: 100px;
+    padding-left: 15px;
+    float: left;
+    height: 35px;
+    border:solid 1px #EBEBEB;
+}
+div.checkCode>div.image{
+    height: 35px;
+    width: 80px;
+    margin: 0 10px 0 10px;
+    float: left;
+    border:solid 1px #EBEBEB;
+}
+div.checkCode>div.change>a{
+	display:block;
+	height: 25px;
+	width:150px;
+	float: left;
+	margin-top:10px;
+    font-size: 15px;
+    text-decoration: none;
+}
+div.center>div.next{
+    height: 35px;
+    margin: 20px 0 0 10px;
+}
+div.center>div.next>button{
+    background: #408AEC;
+    width: 365px;
+    height: 35px;
+}
+
+

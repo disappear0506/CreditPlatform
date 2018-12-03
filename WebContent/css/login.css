@@ -1,0 +1,125 @@
+*{margin: 0; padding: 0;}
+.wp{
+    margin: 0 auto;
+    width: 960px;
+}
+body {
+    font-family: Microsoft YaHei;
+    font-size: 20px;
+}
+.top{
+    width: 1060px;
+    height: 100px;
+    border-bottom:solid 1px  #EBEBEB;
+}
+.top>img{
+    margin: 15px 0 15px 50px;
+    width: 200px;
+    height: 75px;
+    background-color: #0066bb;
+    float: left;
+}
+.top>.title{
+    margin: 15px 0 15px 15px;
+    width: 130px;
+    height: 70px;
+    float: left;
+    border-left:solid 1px  #EBEBEB;;
+    text-align: center;
+    line-height: 70px;
+    font-size: 24px;
+}
+.top>.register{
+    margin: 15px 50px 15px 0;
+    width: 230px;
+    height: 70px;
+    float: right;
+    text-align: center;
+    line-height: 70px;
+    font-size: 15px;
+}
+.top>.register>button{
+	display:block;
+	height:40px;
+	border:0px;
+	background:#A7ADED;
+	font-family: "Microsoft YaHei",STHeiti,Helvetica,Arial,sans-serif;
+	font-size:16px;
+	color:#FFF;
+	float:right;
+	margin-right:30px;
+	line-height:40px;
+	margin-top:15px;
+	font-weight:bold;
+	width:70px;
+	margin-left:10px;
+}
+
+.center{
+    margin-top:50px ;
+    width: 960px;
+    height: 300px;
+}
+.center>.picture{
+    width:400px ;
+    height:300px ;
+    background: #617775;
+    float: left;
+}
+.center>.login{
+    width: 400px;
+    height: 300px;
+    float: right;
+}
+.center>.login div{
+    width:350px ;
+    height:35px ;
+    margin-bottom: 20px;
+    float: right;
+}
+.center>.login div>input{
+    margin-bottom:20px ;
+    height: 35px;
+    width: 350px;
+    border:solid 1px #EBEBEB;
+    padding-left: 15px;
+}
+.center>.login>.checkBox{
+    font-size:15px ;
+    height: 20px;
+    line-height: 15px;
+}
+.center>.login>.checkBox>input{
+    width: 20px;
+    height: 15px;
+    float: left;
+    margin-left: 20px;
+}
+.center>.login>.checkBox>a{
+    text-decoration: none;
+    float: right;
+}
+.center>.login>div>button{
+    width: 365px;
+    height: 35px;
+    background-color: #408AEC;
+}
+#foot
+{
+	height:150px;
+	width:1080px;
+	margin:0 auto;
+	
+}
+#personal
+{
+	height:50px;
+	width:300px;
+	line-height:50px;
+	font-size:14px;
+	margin-left:400px;
+	margin-top:50px;
+}
+
+
+

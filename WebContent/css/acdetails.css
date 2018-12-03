@@ -1,0 +1,401 @@
+@charset "utf-8";
+/* CSS Document */
+
+body
+{
+	padding:0px;
+	height:100%;
+	min-height:600px;
+	min-width:1200px;
+	font-family: "Microsoft YaHei",STHeiti,Helvetica,Arial,sans-serif;
+}
+#top
+{
+	height:70px;
+	width:1200px;
+	margin:0 auto;
+	margin-top:20px;
+}
+
+#main
+{
+	width:1200px;
+	margin:0 auto;
+	margin-top:20px;
+}
+
+
+#foot
+{
+	height:100px;
+	width:1200px;
+	margin:0 auto;
+	margin-top:20px;
+	margin-bottom:20px;
+}
+#top #logo
+{
+	height:70px;
+	width:150px;
+	background:url(../images/logo.png);
+	float:left;
+}
+
+
+#top a.naviga
+{
+	text-decoration:none;
+	font-family: "Microsoft YaHei",STHeiti,Helvetica,Arial,sans-serif;
+	font-size:20px;
+	color:#A7ADED;
+	line-height:70px;
+	display:block;
+	height:70px;
+	margin-left:10px;
+	padding-left:10px;
+	float:left;
+	font-weight:bold;
+}
+
+#top a.naviga:hover
+{
+	color:#517290;
+}
+
+#top a.naviga_onclick
+{
+	text-decoration:none;
+	font-family: "Microsoft YaHei",STHeiti,Helvetica,Arial,sans-serif;
+	font-size:20px;
+	color:#517290;
+	line-height:70px;
+	display:block;
+	height:70px;
+	margin-left:10px;
+	padding-left:10px;
+	float:left;
+	font-weight:bold;
+}
+
+
+#top #submit
+{
+	height:70px;
+	width:200px;
+	float:right;
+}
+#top #submit #login
+{
+	display:block;
+	height:40px;
+	border:0px;
+	background:#517290;
+	font-family: "Microsoft YaHei",STHeiti,Helvetica,Arial,sans-serif;
+	font-size:16px;
+	color:#FFF;
+	float:left;
+	margin-left:30px;
+	line-height:40px;
+	margin-top:15px;
+	font-weight:bold;
+}
+#top #submit #register
+{
+	display:block;
+	height:40px;
+	border:0px;
+	background:#A7ADED;
+	font-family: "Microsoft YaHei",STHeiti,Helvetica,Arial,sans-serif;
+	font-size:16px;
+	color:#FFF;
+	float:left;
+	margin-left:30px;
+	line-height:40px;
+	margin-top:15px;
+	font-weight:bold;
+}
+#main>#main_left
+{
+	width:780px;
+	margin-right:20px;
+	float:left;
+}
+
+#main>#main_right
+{
+	height:850px;
+	width:400px;
+	float:left;
+}
+
+#main>#main_left>#acdetails01
+{
+	margin-top:20px;
+	width:778px;
+	height:192px;
+	border:1px #ccc solid;
+}
+#main>#main_left>#acdetails02
+{
+	margin-top:20px;
+	width:778px;
+	height:342px;
+	border:1px #ccc solid;
+	display:none;
+}
+.title
+{
+	height:49px;
+	width:778px;
+	border-bottom:1px #ccc solid;
+}
+.title>.titlename
+{
+	font-size:20px;
+	height:48px;
+	line-height:48px;
+	width:200px;
+	padding-left:20px;
+	float:left;
+}
+
+.title>a
+{
+	text-decoration:none;
+	color:#ccc;
+	width:70px;
+	float:right;
+	margin-right:20px;
+	height:48px;
+	line-height:48px;
+	font-size:14px;
+	cursor:pointer;
+}
+.title>a:hover
+{
+	color: #09F;
+}
+#main>#main_left>#acdetails01>#ac01main
+{
+	font-size:14px;
+	width:738px;
+	margin-left:20px;
+	margin-top:10px;
+	height:120px;
+	line-height:30px;
+	word-break:break-all;
+	white-space:normal;	
+}
+
+#main>#main_left>#acdetails02>#ac02main
+{
+	font-size:14px;
+	width:738px;
+	margin-left:20px;
+	margin-top:10px;
+	height:270px;
+	line-height:30px;
+	word-break:break-all;
+	white-space:normal;
+	
+}
+#main>#main_left>#acforum
+{
+	margin-top:20px;
+	width:778px;
+	border:1px #ccc solid;
+}
+#main>#main_left>#acforum>#acform_main
+{
+	width:778px;
+}
+
+#main>#main_right>#rightinfo
+{
+	height:420px;
+	width:300px;
+	border:1px solid #ccc;
+}
+#main>#main_right>#rightinfo>#info01
+{
+	width:300px;
+	height:200px;
+}
+
+#main>#main_right>#rightinfo>#info02
+{
+	width:300px;
+	height:80px;
+	border-bottom:1px solid #ccc;
+	border-top:1px solid #ccc;
+}
+#main>#main_right>#rightinfo>#info03
+{
+	width:300px;
+	height:100px;
+}
+#main>#main_right>#rightinfo>#info01>#info01title
+{
+	height:40px;
+	width:260px;
+	margin-left:20px;
+	margin-top:10px;
+	margin-bottom:10px;
+	line-height:40px;
+	font-weight:bold;
+	font-size:18px;
+}
+#main>#main_right>#rightinfo>#info01>#info01main
+{
+	height:125px;
+	width:260px;
+	margin-left:20px;
+}
+#main>#main_right>#rightinfo>#info01>#info01main>.infoitem
+{
+	height:25px;
+	line-height:25px;
+	width:260px;
+	font-size:14px;
+}
+#main>#main_right>#rightinfo>#info02>input
+{
+	height:50px;
+	width:150px;
+	border:0px;
+	background:#A7ADED;
+	color:#fff;
+	font-weight:bold;
+	font-size:24px;
+	line-height:50px;
+	margin-top:15px;
+	margin-left:40px;
+}
+#main>#main_right>#rightinfo>#info03>#info03title
+{
+	margin-left:20px;
+	margin-top:10px;
+	height:40px;
+	line-height:40px;
+	width:180px;
+	float:left;
+	font-size:24px;
+}
+#main>#main_right>#rightinfo>#info03>#info03status
+{
+	margin-top:20px;
+	height:30px;
+	width:70px;
+	line-height:30px;
+	font-size:16px;
+	color:#fff;
+	background:#A7ADED;
+	float:right;
+	margin-right:20px;
+	text-align:center;
+}
+#main>#main_right>#rightinfo>#info03>#info03num
+{
+	margin-top:10px;
+	height:50px;
+	width:260px;
+	margin-left:20px;
+	line-height:50px;
+	font-size:36px;
+	font-weight:bold;
+}
+
+#main>#main_right>#rightapply
+{
+	height:260px;
+	width:300px;
+	border:1px #ccc solid;
+	margin-top:30px;
+}
+#main>#main_right>#rightapply>.applyitem
+{
+	height:30px;
+	margin-top:10px;
+	margin-left:20px;
+	width:260px;
+	
+}
+#main>#main_right>#rightapply>.applyitem>img
+{
+	display:block;
+	float:left;
+}
+#main>#main_right>#rightapply>.applyitem>.username
+{
+	height:30px;
+	width:180px;
+	margin-left:20px;
+	font-size:14px;
+	line-height:30px;
+	float:left;
+}
+.page
+{
+	margin-top:20px;
+	margin-bottom:30px;
+	width:150px;
+	float:right;
+	height:40px;
+	margin-right:20px;
+}
+
+
+.page>.pageitem
+{
+	width:28px;
+	height:30px;
+	float:left;
+	margin-right:5px;
+	border:1px solid #ccc;
+	text-align:center;
+	line-height:30px;
+	cursor:pointer;
+}
+.page>#pagefirst
+{
+	background:#ccc;
+}
+
+#personal
+{
+	height:50px;
+	width:300px;
+	line-height:50px;
+	font-size:14px;
+	margin-left:400px;
+	margin-top:50px;
+}
+#info02 input{
+	background-color:#A7ADED;
+	display:inline;
+	margin-left:20px;
+	font-size:20px;
+}
+.othercom
+{
+
+	margin-top:10px;
+	margin-left:20px;
+	margin-bottom:10px;
+	height:150px;
+	width:700px;
+	font-size:14px;
+}
+.info{
+	float:left;
+	width:100px;
+	height:130px;
+
+	
+}
+.comcontent{
+	float:left;
+	width:600px;
+	height:130px;
+	line-height:30px;
+}

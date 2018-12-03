@@ -1,0 +1,53 @@
+#left{
+	height:200px;
+	width:200px;
+	float:left;
+}
+
+#right{
+	height:300px;
+	width:800px;
+	float:left;
+	margin-left:50px;
+}
+.actitle
+{
+	display:block;
+	height:50px;
+	width:200px;
+	line-height:50px;
+	text-align:center;
+}
+
+#core{
+	width:200px;
+	height:130px;
+	float:left;
+	margin-left:30px;
+}
+#rating{
+	font-size:50px;
+}
+
+a.save
+{
+	text-decoration:none;
+	font-family: "Microsoft YaHei",STHeiti,Helvetica,Arial,sans-serif;
+	font-size:20px;
+	color:#A7ADED;
+	line-height:30px;
+	display:block;
+	height:30px;
+	width:50px;
+	margin-left:350px;
+	margin-top:28px;
+	float:left;
+	text-align:center;
+	font-weight:bold;
+}
+#describe
+{
+	margin-left:30px;
+	margin-top:20px;
+}
+

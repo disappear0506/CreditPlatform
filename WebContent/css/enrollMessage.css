@@ -1,0 +1,138 @@
+@charset "utf-8";
+/* CSS Document */
+a{
+	cursor:pointer;
+}
+body
+{
+	padding:0px;
+	height:100%;
+	min-height:600px;
+	min-width:1200px;
+	font-family: "Microsoft YaHei",STHeiti,Helvetica,Arial,sans-serif;
+}
+#top
+{
+	height:70px;
+	width:1280px;
+	margin:0 auto;
+}
+#main
+{
+	height:850px;
+	width:1280px;
+	margin:0 auto;
+}
+
+
+#foot
+{
+	height:100px;
+	width:1280px;
+	margin:0 auto;
+	margin-top:20px;
+	margin-bottom:20px;
+}
+
+#top #logo
+{
+	height:70px;
+	width:150px;
+	background:url(../images/logo.png);
+	float:left;
+}
+
+
+#top a.naviga
+{
+	text-decoration:none;
+	font-family: "Microsoft YaHei",STHeiti,Helvetica,Arial,sans-serif;
+	font-size:20px;
+	color:#A7ADED;
+	line-height:70px;
+	display:block;
+	height:70px;
+	margin-left:10px;
+	padding-left:10px;
+	float:left;
+	font-weight:bold;
+}
+
+#top a.naviga:hover
+{
+	color:#517290;
+}
+
+#top a.naviga_onclick
+{
+	text-decoration:none;
+	font-family: "Microsoft YaHei",STHeiti,Helvetica,Arial,sans-serif;
+	font-size:20px;
+	color:#517290;
+	line-height:70px;
+	display:block;
+	height:70px;
+	margin-left:10px;
+	padding-left:10px;
+	float:left;
+	font-weight:bold;
+}
+
+
+#top #submit
+{
+	height:70px;
+	width:200px;
+	float:right;
+}
+#top #submit #login
+{
+	display:block;
+	height:40px;
+	border:0px;
+	background:#517290;
+	font-family: "Microsoft YaHei",STHeiti,Helvetica,Arial,sans-serif;
+	font-size:16px;
+	color:#FFF;
+	float:left;
+	margin-left:30px;
+	line-height:40px;
+	margin-top:15px;
+	font-weight:bold;
+}
+#top #submit #register
+{
+	display:block;
+	height:40px;
+	border:0px;
+	background:#A7ADED;
+	font-family: "Microsoft YaHei",STHeiti,Helvetica,Arial,sans-serif;
+	font-size:16px;
+	color:#FFF;
+	float:left;
+	margin-left:30px;
+	line-height:40px;
+	margin-top:15px;
+	font-weight:bold;
+}
+#content{
+	margin:0 auto;
+	height:500px;
+	border:double;
+	width:1000px;
+	padding:20px;
+}
+
+.page
+{
+	margin-top:40px;
+	margin-left:75px;
+}
+.pageitem
+{
+	margin-left:10px;
+	font-size:16px;
+	color:#000;
+	display:inline;
+	float:left
+}
