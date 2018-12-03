@@ -1,4 +1,4 @@
-package code.action;
+﻿package code.action;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -10,6 +10,8 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -29,8 +31,13 @@ import com.opensymphony.xwork2.ActionContext;
 
 import code.domain.Activity;
 import code.domain.ActivityType;
+import code.domain.Comment;
+import code.domain.Score;
 import code.domain.User;
 import code.service.ActivityServiceI;
+import code.service.CommentServiceI;
+import code.service.MessageServiceI;
+import code.service.ScoreServiceI;
 import code.service.UserServiceI;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -47,6 +54,12 @@ public class ActivityAction {
 	private ActivityServiceI activityService;
 	@Resource
 	private UserServiceI userService;
+	@Resource
+	private CommentServiceI commentService;
+	@Resource
+	private ScoreServiceI scoreService;
+	@Resource
+	private MessageServiceI messageService;
 	public Activity activity;
 	
 	private String background; 
@@ -60,6 +73,24 @@ public class ActivityAction {
 	private List<User> joinerlist;// 参与活动的人数
 	
 	private List<User> trueJoinerlist;
+	private List<User> Outerlist;//被拒绝的人员
+	private List<User> isdoList;//等待审核的报名人员
+
+	public List<User> getOuterlist() {
+		return Outerlist;
+	}
+
+	public void setOuterlist(List<User> outerlist) {
+		Outerlist = outerlist;
+	}
+
+	public List<User> getIsdoList() {
+		return isdoList;
+	}
+
+	public void setIsdoList(List<User> isdoList) {
+		this.isdoList = isdoList;
+	}
 
 	public List<User> getTrueJoinerlist() {
 		return trueJoinerlist;
@@ -248,6 +279,8 @@ public class ActivityAction {
 		response.setHeader("Content-type", "text/html;charset=UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		JSONArray jsonArray = activityService.addJoiner(activityId,userId);
+		//发送信息
+		
 		try {
 			PrintWriter out = response.getWriter();
 			out.print(jsonArray);
@@ -284,12 +317,44 @@ public class ActivityAction {
 		activity.setActivityType(type);
 		acPerNum = activityService.getAcPerNum(activityId);
 		joinerlist = activityService.getJoiner(activityId,0);
-		trueJoinerlist = activityService.acceptJoiner(activityId,0);
+		trueJoinerlist = activityService.acceptJoiner(activityId,0); // 同意报名人员
 		joinCount = activityService.getAcPerNum(activityId);
 		trueJoinCount = activityService.getAcTruePerNum(activityId);
+		Outerlist = activityService.findUnwillingOuter(activityId); //拒绝报名人员
+		isdoList =activityService.getJoiner(activityId,0);//正在等待审核的报名人员
+		
+		Iterator<User> it = isdoList.iterator();  
+		while(it.hasNext()) {  
+		    User isdo = it.next();
+		    for(User trueJoiner:trueJoinerlist)
+			{
+				if((isdo.getUserId())==trueJoiner.getUserId())
+				{
+					it.remove();
+				}
+			}
+	       
+		 }  
+		it = isdoList.iterator();  
+		while(it.hasNext()) {  
+		    User isdo = it.next();
+		    for(User Outer:Outerlist)
+			{
+				if((isdo.getUserId())==Outer.getUserId())
+				{
+					it.remove();
+				}
+			}
+	       
+		 }  
+		System.out.println("11111111111111111+"+isdoList.size()+"+"+Outerlist.size()+"+"+trueJoinerlist.size());
+		
+		//System.out.println("11111111111111111+"+list.size()+list.get(0).getName());
 		return "success";
 	}
+	
 	//显示报名的人
+	/*
     @Action(value="getJoinerByPage")
     public void getJoinerByPage(){
     	Integer logCount = activityService.getAcPerNum(activityId);
@@ -314,8 +379,9 @@ public class ActivityAction {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    }
+    }*/
     //显示报名通过的人
+	/*
     @Action(value="getTrueJoinerByPage")
     public void getTrueJoinerByPage(){
     	Integer logCount = activityService.getAcTruePerNum(activityId);
@@ -339,7 +405,7 @@ public class ActivityAction {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-    }
+    }*/
     //活动整个流程控制
     //1.点击开始活动按钮
     @Action(value="startactivity",results = { @Result(location = "/WEB-INF/changeStatusSuccess.jsp") })
@@ -351,11 +417,11 @@ public class ActivityAction {
     	return "success";
     }
     //2.结束活动按钮
-    @Action(value="endactivity",results={ @Result(location="/WEB-INF/endActivitySuccess.jsp")})
+    @Action(value="endactivity",results={ @Result(location="/WEB-INF/changeStatusSuccess.jsp")})
     public String endActivity()
     {
     	//修改活动状态为“待评价”
-    	activityService.changeStatus(activityId, "待评价");
+    	activityService.changeStatus(activityId, "已结束");
     	request.setAttribute("activityId", activityId);
     	request.setAttribute("infomsg", "活动结束成功");
     	return "success";
@@ -370,29 +436,121 @@ public class ActivityAction {
 	}
 
 	@Action(value="evaluate",
-			results={@Result(name = "success", location = "/WEB-INF/evaluate.jsp"),
-					@Result(name = "error", location = "/WEB-INF/changeStatusSuccess.jsp") })
+			results={@Result(name = "success", location = "/WEB-INF/evaluate.jsp")
+})
 	public String evaluate(){
     	//获取要评价的活动信息
     	Activity activity=activityService.findById(activityId);
     	request.setAttribute("activity", activity);
     	//设置当前页
-    	request.setAttribute("currPage", currPage);
-    	System.out.println("currpage:"+currPage);
+    	 //request.setAttribute("currPage", currPage);
+    	//System.out.println("currpage:"+currPage);
     	//查询当前要评论的用户
-    	User joiner=activityService.findTrueJoin(activityId,currPage);
-    	if(joiner==null)
-    	{
-    		request.setAttribute("activityId", activityId);
-        	request.setAttribute("infomsg", "已全部评论完毕");
-        	activityService.changeStatus(activityId, "已结束");
-    		return "error";
-    	}else
-    	{
-    		request.setAttribute("joiner", joiner);
-    	}
+    	trueJoinerlist=activityService.acceptJoiner2(activityId);
+    	
 		return "success";
 	}
+	public String commentContent;
+	
+	public String getCommentContent() {
+		return commentContent;
+	}
+
+	public void setCommentContent(String commentContent) {
+		this.commentContent = commentContent;
+	}
+	List<String> canyuscore = new ArrayList<String>();
+	
+	public List<String> getCanyuscore() {
+		return canyuscore;
+	}
+
+	public void setCanyuscore(List<String> canyuscore) {
+		this.canyuscore = canyuscore;
+	}
+	public String faqiscore;
+	
+	public String getFaqiscore() {
+		return faqiscore;
+	}
+
+	public void setFaqiscore(String faqiscore) {
+		this.faqiscore = faqiscore;
+	}
+	
+	//评价活动
+	@Action(value = "setEvaluate", results = { @Result(location = "/WEB-INF/changeStatusSuccess.jsp") })
+	public String setEvaluate(){
+		//保存活动评价
+		Activity activity=activityService.findById(activityId);
+		User user = (User)request.getSession().getAttribute("user");
+		
+		Comment comment = new Comment();
+		comment.setActivity(activity);
+		
+		comment.setCommenter(user);
+		comment.setContent(commentContent);
+		comment.setTime(new Date());
+		commentService.save(comment);
+		
+		//保存评分
+		//根据活动类别设置总分
+		int sum=0;
+		int activityTypeId = activity.getActivityType().getActivityTypeId();
+		if(activityTypeId==1)
+		{
+			sum=10;
+		}else if(activityTypeId==2)
+		{
+			sum=5;
+		}else if(activityTypeId==3)
+		{
+			sum=15;
+		}else if(activityTypeId==4){
+			sum=8;
+		}else{
+			sum=20;
+		}
+		//1.发起者
+		if(faqiscore!=null)
+		{
+			double score = Double.valueOf(faqiscore);
+			score = score/10.0*sum;
+			Score scoreEntity=new Score();
+			scoreEntity.setActivity(activity);
+			scoreEntity.setPingjiaer(user);
+			scoreEntity.setScore(score);
+			scoreEntity.setTrueJoiner(activity.getPublisher());
+			scoreService.save(scoreEntity);
+		}
+		//2.对参与者进行评价
+		//先将自己从实际参与者中移除
+		List<User> list=new ArrayList<User>();
+		list = activity.getTrueJoinerList();
+		Iterator<User> it = list.iterator();  
+		while(it.hasNext()) {  
+		    User canyuzhe = it.next();
+		    if(canyuzhe.getUserId()==user.getUserId())
+					it.remove();
+		 }  
+		for(int i=0; i<canyuscore.size();i++)
+		{
+			User canyuzhe = list.get(i);
+			double score = Double.valueOf(canyuscore.get(i));
+			score = score/10.0*sum;
+			Score scoreEntity=new Score();
+			scoreEntity.setActivity(activity);
+			scoreEntity.setPingjiaer(user);
+			scoreEntity.setScore(score);
+			scoreEntity.setTrueJoiner(canyuzhe);
+			scoreService.save(scoreEntity);
+		}
+		request.setAttribute("infomsg", "评价成功");
+		return "success";
+	}
+	
+	
+	
     //4.评价自己参与的活动
     
     @Action(value="joinerevaluate", results={@Result(location="/WEB-INF/joinerevaluate.jsp"),})

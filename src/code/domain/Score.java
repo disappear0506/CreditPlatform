@@ -1,4 +1,4 @@
-package code.domain;
+﻿package code.domain;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -15,12 +15,30 @@ public class Score {
 	private int scoreId; //信用分的id
 	private User trueJoiner; //获得者 外键 1-n
 	private Activity activity; //获得的活动来源 1-n
-	
+	private Double score;//获得的分数
+	private User pingjiaer;//评价者
 	public Score() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
+	public Double getScore() {
+		return score;
+	}
+
+	public void setScore(Double score) {
+		this.score = score;
+	}
+	@ManyToOne(cascade={CascadeType.PERSIST,CascadeType.REFRESH})
+	@JoinColumn(name="pingjiaer")
+	public User getPingjiaer() {
+		return pingjiaer;
+	}
+
+	public void setPingjiaer(User pingjiaer) {
+		this.pingjiaer = pingjiaer;
+	}
+
 	@Id
 	@GeneratedValue
 	public int getScoreId() {

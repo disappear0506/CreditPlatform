@@ -1,4 +1,4 @@
-package code.service;
+﻿package code.service;
 
 import java.util.List;
 import java.util.Map;
@@ -35,6 +35,7 @@ public interface ActivityServiceI {
 	public String refuseJoiner(int activityId, int userId);
 	//查看已加入的
 	public List<User> acceptJoiner(int activityId,int begin);
+	public List<User> acceptJoiner2(int activityId);
 	//结束活动
 	public void stopActivity(int activityId);
 	//根据条件搜索我发布的活动
@@ -52,5 +53,7 @@ public interface ActivityServiceI {
 	public PageBean<Activity> findByCondition(int currPage,int activityType,Map<String,String> refers);
 	//添加活动评论
 	public void addCommet(int activityId,String content,User commenter);
+	//被拒绝的列表
+	public List<User> findUnwillingOuter(int activityId);
 	
 }

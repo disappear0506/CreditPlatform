@@ -1,7 +1,8 @@
-package code.service.impl;
+﻿package code.service.impl;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -14,11 +15,13 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import code.dao.ActivityDAOI;
+import code.dao.MessageDAOI;
 import code.dao.UserDAOI;
 import code.domain.Activity;
 import code.domain.ActivityBO;
 import code.domain.ActivityType;
 import code.domain.Comment;
+import code.domain.MessageT;
 import code.domain.PageBean;
 import code.domain.User;
 import code.service.ActivityServiceI;
@@ -34,10 +37,14 @@ public class ActivityServiceImpl implements ActivityServiceI{
 	
 	@Resource
 	private UserDAOI userDAO;
+	
+	@Resource
+	private MessageDAOI messageDAO;
 	@Override
 	public void publish(Activity activity) {
 		activityDAO.save(activity);
 	}
+	
 	@Override
 	public ActivityType getActivityType(String name) {
 		return activityDAO.getActivityType(name);
@@ -219,6 +226,16 @@ public class ActivityServiceImpl implements ActivityServiceI{
 				activityDAO.update(activity);
 				JSONObject obj = new JSONObject();                  
 				obj.put("info", "接受成功");
+				MessageT message = new MessageT();
+				message.setContent("“"+activity.getName()+"’活动的活动发起人同意了您的报名！");
+				message.setAccepter(user);
+				message.setIsRead(0);
+				message.setSender(activity.getPublisher());
+				message.setSendTime(new Date());
+				messageDAO.save(message);
+				
+				
+				
 				jsonArray.add(obj);
 			}
 			if(list.size()>=3){
@@ -279,6 +296,15 @@ public class ActivityServiceImpl implements ActivityServiceI{
 			list.add(user);
 			activity.setUnwillingOutList(list);
 			activityDAO.update(activity);
+			MessageT message = new MessageT();
+			message.setContent("“"+activity.getName()+"’活动的活动发起人拒绝了您的报名！");
+			message.setAccepter(user);
+			message.setIsRead(0);
+			message.setSender(activity.getPublisher());
+			message.setSendTime(new Date());
+			messageDAO.save(message);
+			
+			
 			return "拒绝成功";
 		}
 		return null;
@@ -306,6 +332,14 @@ public class ActivityServiceImpl implements ActivityServiceI{
 		}
 		return returnlist;
 	}
+	
+	//查看全部活动参与者
+		@Override
+		public List<User> acceptJoiner2(int activityId) {
+			List<User> templist = activityDAO.findTrueJoiner(activityId);
+			return templist;
+		}
+	
 	@Override
 	public int getAcTruePerNum(int activityId) {
 		return activityDAO.getAcTruePerNum(activityId);
@@ -325,8 +359,34 @@ public class ActivityServiceImpl implements ActivityServiceI{
 		JSONArray jsonArray = new JSONArray();
 		jsonArray.add(logCount);
 		int pernum = 0;
+		List<User> trueJoinerlist=new ArrayList<User>();
+		List<User> unwillingOutSet=new ArrayList<User>();
+		
 		for(Activity a:list){
 			pernum = activityDAO.getAcPerNum(a.getActivityId());
+			trueJoinerlist = activityDAO.findTrueJoiner(a.getActivityId()); // 同意报名人员
+			unwillingOutSet = activityDAO.findUnwillingOuter(a.getActivityId()); //拒绝报名人员
+			
+			String trueJoinerId ="";
+			for(User trueJoiner:trueJoinerlist){
+				trueJoinerId+=trueJoiner.getUserId()+",";
+			}
+			String unwillingOutID ="";
+			for(User unwillingOut:unwillingOutSet){
+				unwillingOutID+=unwillingOut.getUserId()+",";
+			}
+			
+			Set<Comment> commentSet=new HashSet<Comment>();
+			commentSet =a.getCommentSet();
+			int ispingjia =0;
+			for(Comment comment:commentSet)
+			{
+				if((comment.getCommenter().getUserId())==userId)
+				{
+					ispingjia =1;
+				}
+			}
+			
 			JSONObject ac = new JSONObject();
 			ac.put("activityId", a.getActivityId());
 			ac.put("name", a.getName());
@@ -334,6 +394,9 @@ public class ActivityServiceImpl implements ActivityServiceI{
 			ac.put("imgUrl", a.getImgUrl());
 			ac.put("time", a.getTime());
 			ac.put("perNum", pernum);
+			ac.put("trueJoinerId", trueJoinerId);
+			ac.put("unwillingOutID", unwillingOutID);
+			ac.put("ispingjia", ispingjia);
 			jsonArray.add(ac);
 		}
 		return jsonArray;
@@ -346,6 +409,16 @@ public class ActivityServiceImpl implements ActivityServiceI{
 		jsonArray.add(logCount);
 		int pernum = 0;
 		for(Activity a:list){
+			Set<Comment> commentSet=new HashSet<Comment>();
+			commentSet =a.getCommentSet();
+			int ispingjia =0;
+			for(Comment comment:commentSet)
+			{
+				if((comment.getCommenter().getUserId())==userId)
+				{
+					ispingjia =1;
+				}
+			}
 			pernum = activityDAO.getAcPerNum(a.getActivityId());
 			JSONObject ac = new JSONObject();
 			ac.put("activityId", a.getActivityId());
@@ -354,6 +427,7 @@ public class ActivityServiceImpl implements ActivityServiceI{
 			ac.put("imgUrl", a.getImgUrl());
 			ac.put("time", a.getTime());
 			ac.put("perNum", pernum);
+			ac.put("ispingjia", ispingjia);
 			jsonArray.add(ac);
 		}
 		return jsonArray;
@@ -381,6 +455,7 @@ public class ActivityServiceImpl implements ActivityServiceI{
 		}
 		return null;
 	}
+	
 	//增加一条评论
 	@Override
 	public void addCommet(int activityId, String content, User commenter) {
@@ -393,5 +468,10 @@ public class ActivityServiceImpl implements ActivityServiceI{
 		commentSet.add(comment);
 		activity.setCommentSet(commentSet);
 		activityDAO.update(activity);
+	}
+	@Override
+	public List<User> findUnwillingOuter(int activityId) {
+		List<User> list = activityDAO.findUnwillingOuter(activityId);
+		return list;
 	}
 }
