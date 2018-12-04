@@ -1,9 +1,12 @@
-package code.service.impl;
+﻿package code.service.impl;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Properties;
+import java.util.Set;
 
 import javax.annotation.Resource;
 import javax.mail.Address;
@@ -19,13 +22,15 @@ import org.springframework.transaction.annotation.Transactional;
 import com.opensymphony.xwork2.ActionContext;
 
 import code.dao.ActivityDAOI;
+import code.dao.MessageDAOI;
 import code.dao.UserDAOI;
 import code.domain.Activity;
+import code.domain.Comment;
 import code.domain.User;
 import code.service.UserServiceI;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-
+import code.domain.MessageT;
 @Transactional
 @Repository("userService")
 public class UserServiceImpl implements UserServiceI{
@@ -35,6 +40,8 @@ public class UserServiceImpl implements UserServiceI{
 	
 	@Resource
 	private ActivityDAOI activityDAO;
+	@Resource
+	private MessageDAOI messageDAO;
 	
 	@Override
 	public User login(User user) {
@@ -75,12 +82,25 @@ public class UserServiceImpl implements UserServiceI{
 		for(Activity a:list){
 			pernum = activityDAO.getAcPerNum(a.getActivityId());
 			JSONObject ac = new JSONObject();
+			
+			Set<Comment> commentSet=new HashSet<Comment>();
+			commentSet =a.getCommentSet();
+			int ispingjia =0;
+			for(Comment comment:commentSet)
+			{
+				if((comment.getCommenter().getUserId())==user.getUserId())
+				{
+					ispingjia =1;
+				}
+			}
+			
 			ac.put("activityId", a.getActivityId());
 			ac.put("name", a.getName());
 			ac.put("status", a.getStatus());
 			ac.put("imgUrl", a.getImgUrl());
 			ac.put("time", a.getTime());
 			ac.put("perNum", pernum);
+			ac.put("ispingjia", ispingjia);
 			jsonArray.add(ac);
 		}
 		return jsonArray;
@@ -157,6 +177,15 @@ public class UserServiceImpl implements UserServiceI{
 		String tempDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 		userDAO.addEnroll(sessionUser.getName(), activity.getName(),tempDate,publishername);
 		ActionContext.getContext().getSession().put("user",sessionUser);
+		MessageT message = new MessageT();
+		message.setContent(sessionUser.getName()+"报名了您发布的活动‘"+activity.getName()+"’");
+		message.setAccepter(activity.getPublisher());
+		message.setIsRead(0);
+		message.setSender(sessionUser);
+		message.setSendTime(new Date());
+		messageDAO.save(message);
+		//messageDAO
+		
 		return "报名成功！";
 	}
 
@@ -167,8 +196,34 @@ public class UserServiceImpl implements UserServiceI{
 		JSONArray jsonArray = new JSONArray();
 		jsonArray.add(logCount);
 		int pernum = 0;
+		List<User> trueJoinerlist =new ArrayList<User>();
+		List<User> unwillingOutSet =new ArrayList<User>();
+		
 		for(Activity a:list){
 			pernum = activityDAO.getAcPerNum(a.getActivityId());
+			trueJoinerlist = activityDAO.findTrueJoiner(a.getActivityId()); // 同意报名人员
+			unwillingOutSet = activityDAO.findUnwillingOuter(a.getActivityId()); //拒绝报名人员
+			
+			String trueJoinerId ="";
+			for(User trueJoiner:trueJoinerlist){
+				trueJoinerId+=trueJoiner.getUserId()+",";
+			}
+			String unwillingOutID ="";
+			for(User unwillingOut:unwillingOutSet){
+				unwillingOutID+=unwillingOut.getUserId()+",";
+			}
+			
+			Set<Comment> commentSet=new HashSet<Comment>();
+			commentSet =a.getCommentSet();
+			int ispingjia =0;
+			for(Comment comment:commentSet)
+			{
+				if((comment.getCommenter().getUserId())==user.getUserId())
+				{
+					ispingjia =1;
+				}
+			}
+			
 			JSONObject ac = new JSONObject();
 			ac.put("activityId", a.getActivityId());
 			ac.put("name", a.getName());
@@ -176,6 +231,9 @@ public class UserServiceImpl implements UserServiceI{
 			ac.put("imgUrl", a.getImgUrl());
 			ac.put("time", a.getTime());
 			ac.put("perNum", pernum);
+			ac.put("trueJoinerId", trueJoinerId);
+			ac.put("unwillingOutID", unwillingOutID);
+			ac.put("ispingjia", ispingjia);
 			jsonArray.add(ac);
 		}
 		return jsonArray;

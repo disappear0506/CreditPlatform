@@ -10,6 +10,7 @@ $(function(){
 	//接受报名
 	$("#joinDIV").on("click",".accept",function(){
 		var a = $(this).parent().find('.username').find('span');
+		
 		$.ajax({
 			url:"joinerHandler",
 			data:{
@@ -20,11 +21,14 @@ $(function(){
 				$("#trueJoin").empty();
 				var array = $.parseJSON(result);
 				a.text("  "+array[0].info);
-				if(array[0].info.equals("接受成功"))
+				if(array[0].info.equals("接受成功")){
 					a.css("color","green");
+					//location.reload();
+				}
 				else
 					a.css("color","red");
 				array.splice(0,1);
+		
 				$.each(array,function(index,value){
 					$("#trueJoin").append("<div class='applyitem'>"+"<img src='"+value.imgUrl+"' height='30px' width='30px' />"
 							+"<div class='username'><a>"+value.name+"</a></div>"
@@ -62,6 +66,7 @@ $(function(){
 		})
 	})
 	//报名人员翻页
+
 	$("#joinBeginPage").click(function(){
 		if(window.joinIndex>0){
 			window.joinIndex=0;
@@ -94,6 +99,7 @@ $(function(){
 		}
 	})
 	//实际参加人员翻页
+	
 	$("#trueJoinBeginPage").click(function(){
 		if(window.trueJoinIndex>0){
 			window.trueJoinIndex=0;
@@ -126,6 +132,7 @@ $(function(){
 		}
 	})
 })
+
 function getJoiner(index){
 	$.ajax({
 		url:"getJoinerByPage",
