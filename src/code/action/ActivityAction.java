@@ -1,4 +1,4 @@
-﻿package code.action;
+package code.action;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -29,11 +29,16 @@ import org.springframework.stereotype.Controller;
 
 import com.opensymphony.xwork2.ActionContext;
 
+import code.Patttern.Observer;
 import code.domain.Activity;
 import code.domain.ActivityType;
 import code.domain.Comment;
 import code.domain.Score;
 import code.domain.User;
+import code.pattern.impl.ActStartSendMessage;
+import code.pattern.impl.ComputerStrategyimpl;
+import code.pattern.impl.CreditPointsFactoryimpl;
+import code.pattern.impl.MessageSender;
 import code.service.ActivityServiceI;
 import code.service.CommentServiceI;
 import code.service.MessageServiceI;
@@ -60,6 +65,8 @@ public class ActivityAction {
 	private ScoreServiceI scoreService;
 	@Resource
 	private MessageServiceI messageService;
+	@Resource
+	MessageSender sendMessage ;
 	public Activity activity;
 	
 	private String background; 
@@ -413,7 +420,19 @@ public class ActivityAction {
     {
     	//修改活动状态为“进行中”
     	activityService.changeStatus(activityId, "进行中");
+    	Activity activity=activityService.findById(activityId);
     	request.setAttribute("infomsg", "活动开启成功");
+    	
+    	List<User> joinUser = activity.getTrueJoinerList();
+    	System.out.println("活动参与者人数："+joinUser.size());
+    	for(User user:joinUser)
+    	{
+    		Observer observer=new ActStartSendMessage();
+    		observer.setUser(user);
+    		sendMessage.AddObserver(observer);
+    	}
+    	sendMessage.sendMessage(activity);
+    	
     	return "success";
     }
     //2.结束活动按钮
@@ -497,7 +516,8 @@ public class ActivityAction {
 		//根据活动类别设置总分
 		int sum=0;
 		int activityTypeId = activity.getActivityType().getActivityTypeId();
-		if(activityTypeId==1)
+		sum = new CreditPointsFactoryimpl().getCreditPoint(activityTypeId);
+		/*if(activityTypeId==1)
 		{
 			sum=10;
 		}else if(activityTypeId==2)
@@ -510,12 +530,19 @@ public class ActivityAction {
 			sum=8;
 		}else{
 			sum=20;
-		}
+		}*/
 		//1.发起者
 		if(faqiscore!=null)
 		{
 			double score = Double.valueOf(faqiscore);
-			score = score/10.0*sum;
+			//信用分计算
+			ComputerStrategyimpl computerstrategyimpl=new ComputerStrategyimpl();
+			if(score<5.0) { computerstrategyimpl.select(1);}
+			else if(score==5.0) { computerstrategyimpl.select(2);}
+			else  computerstrategyimpl.select(3);
+			computerstrategyimpl.algorithm(score, sum);			
+			//score = score/10.0*sum;
+			
 			Score scoreEntity=new Score();
 			scoreEntity.setActivity(activity);
 			scoreEntity.setPingjiaer(user);
