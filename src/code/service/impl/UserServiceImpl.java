@@ -1,4 +1,4 @@
-﻿package code.service.impl;
+package code.service.impl;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -27,6 +27,7 @@ import code.dao.UserDAOI;
 import code.domain.Activity;
 import code.domain.Comment;
 import code.domain.User;
+import code.pattern.impl.MessageFacadeimpl;
 import code.service.UserServiceI;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -178,7 +179,11 @@ public class UserServiceImpl implements UserServiceI{
 		userDAO.addEnroll(sessionUser.getName(), activity.getName(),tempDate,publishername);
 		ActionContext.getContext().getSession().put("user",sessionUser);
 		MessageT message = new MessageT();
-		message.setContent(sessionUser.getName()+"报名了您发布的活动‘"+activity.getName()+"’");
+	
+		MessageFacadeimpl messagefacade = new MessageFacadeimpl();
+		String s= messagefacade.messageProcess(activity.getName(),3,sessionUser);
+		message.setContent(s);
+		//message.setContent(sessionUser.getName()+"报名了您发布的活动‘"+activity.getName()+"’");
 		message.setAccepter(activity.getPublisher());
 		message.setIsRead(0);
 		message.setSender(sessionUser);
